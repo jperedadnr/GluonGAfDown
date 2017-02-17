@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.mvc.View?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<View fx:id="compassView" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gluonhq.gaf.down.views.CompassPresenter">
+   <top>
+       <VBox alignment="CENTER" minHeight="120.0"> 
+           <children>
+            <Group scaleX="0.8" scaleY="0.8">
+               <children>
+                      <SVGPath content="M 0,0 -26,-69.14286 -52,0 -26,-14.28572 z" fill="red" />
+               </children>
+            </Group> 
+                <Label fx:id="label" />
+           </children>
+       </VBox>
+   </top>
+   <center>
+       <StackPane fx:id="container" alignment="CENTER" styleClass="container">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+       </StackPane>
+   </center>
+   
+</View>

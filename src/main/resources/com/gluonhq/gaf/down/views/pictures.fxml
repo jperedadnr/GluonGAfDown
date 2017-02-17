@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.mvc.View?>
+<?import com.gluonhq.charm.glisten.control.BottomNavigation?>
+<?import javafx.scene.image.ImageView?>
+
+
+<View fx:id="pictures" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gluonhq.gaf.down.views.PicturesPresenter">
+   <center>
+      <ImageView fx:id="imageView" preserveRatio="true" />
+   </center>
+   <bottom>
+       <BottomNavigation fx:id="bottomNavigation"/> 
+   </bottom>
+</View>
