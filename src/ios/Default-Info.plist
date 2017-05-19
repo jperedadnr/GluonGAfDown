@@ -50,5 +50,9 @@
                 <integer>1</integer>
                 <integer>2</integer>
         </array>
+        <key>NSCameraUsageDescription</key>
+        <string>The app requires access to the camera</string>
+        <key>NSPhotoLibraryUsageDescription</key>
+        <string>The app requires access to the gallery</string>
 </dict>
 </plist>
