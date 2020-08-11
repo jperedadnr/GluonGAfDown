@@ -1,8 +1,5 @@
 package com.gluonhq.control.roundslider;
 
-import com.sun.javafx.css.converters.BooleanConverter;
-import com.sun.javafx.css.converters.PaintConverter;
-import com.sun.javafx.css.converters.SizeConverter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,6 +20,9 @@ import javafx.css.StyleableDoubleProperty;
 import javafx.css.StyleableIntegerProperty;
 import javafx.css.StyleableObjectProperty;
 import javafx.css.StyleableProperty;
+import javafx.css.converter.BooleanConverter;
+import javafx.css.converter.PaintConverter;
+import javafx.css.converter.SizeConverter;
 import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
 import javafx.scene.paint.Color;
@@ -696,7 +696,7 @@ public class Knob extends Control {
                 }
                 @Override protected void invalidated() {
                     if(fontSetByCss == false) {
-                        Knob.this.impl_reapplyCSS();
+                        Knob.this.applyCss();
                     }
                 }
                 @Override public CssMetaData getCssMetaData() { return StyleableProperties.TICK_LABEL_FONT; }

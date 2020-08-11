@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.gluonhq.charm.glisten.mvc.View?>
+<?import com.gluonhq.control.roundslider.Knob?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<View fx:id="compassView" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gluonhq.gaf.down.views.CompassPresenter">
+<View fx:id="compassView" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gluonhq.gaf.down.views.CompassPresenter">
    <top>
        <VBox alignment="CENTER" minHeight="120.0"> 
            <children>
@@ -26,6 +27,9 @@
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
+         <children>
+            <Knob fx:id="knob" majorTickUnit="90.0" max="360.0" maxAngle="360.0" minAngle="0.0" showTickLabels="true" showTickMarks="true" />
+         </children>
        </StackPane>
    </center>
    

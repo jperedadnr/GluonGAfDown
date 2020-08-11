@@ -6,9 +6,13 @@ import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.SHOW_IN_DRAWER;
 import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.SKIP_VIEW_STACK;
 import com.gluonhq.charm.glisten.afterburner.AppViewRegistry;
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
+import com.gluonhq.charm.glisten.afterburner.Utils;
 import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.control.Avatar;
+import com.gluonhq.charm.glisten.control.NavigationDrawer;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import java.util.Locale;
+import javafx.scene.image.Image;
 
 public class AppViewManager {
 
@@ -27,9 +31,15 @@ public class AppViewManager {
         return presenterClass.getSimpleName().toUpperCase(Locale.ROOT).replace("PRESENTER", "");
     }
     
-    public static void registerViews(MobileApplication app) {
+    public static void registerViewsAndDrawer(MobileApplication app) {
         for (AppView view : REGISTRY.getViews()) {
             view.registerView(app);
         }
+
+        NavigationDrawer.Header header = new NavigationDrawer.Header("Gluon Mobile",
+                "Multi View Project",
+                new Avatar(21, new Image(AppViewManager.class.getResourceAsStream("/icon.png"))));
+
+        Utils.buildDrawer(app.getDrawer(), header, REGISTRY.getViews());
     }
 }

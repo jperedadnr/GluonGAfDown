@@ -11,7 +11,6 @@ import com.gluonhq.gaf.down.GluonGAfDown;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.util.StringConverter;
 
 public class CompassPresenter extends GluonPresenter<GluonGAfDown> {
@@ -20,11 +19,9 @@ public class CompassPresenter extends GluonPresenter<GluonGAfDown> {
     private View compassView;
 
     @FXML
-    private StackPane container;
-    
-    @FXML
     private Label label;
     
+    @FXML
     private Knob knob;
     
     public void initialize() {
@@ -32,7 +29,7 @@ public class CompassPresenter extends GluonPresenter<GluonGAfDown> {
             if (newValue) {
                 AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        getApp().showLayer(GluonGAfDown.MENU_LAYER)));
+                        getApp().getDrawer().open()));
                 appBar.setTitleText(AppViewManager.COMPASS_VIEW.getTitle());
                 
                 run();
@@ -43,15 +40,6 @@ public class CompassPresenter extends GluonPresenter<GluonGAfDown> {
             knob.rotateProperty().unbind();
             label.textProperty().unbind();
         });
-        
-        knob = new Knob(0, 360, 0);
-        knob.setMajorTickUnit(90);
-        knob.setMinorTickCount(3);
-        knob.setSnapToTicks(false);
-        knob.setShowTickMarks(true);
-        knob.setShowTickLabels(true);
-        knob.setMinAngle(0);
-        knob.setMaxAngle(360);
         
         knob.setLabelFormatter(new StringConverter<Double>() {
             @Override
@@ -75,8 +63,6 @@ public class CompassPresenter extends GluonPresenter<GluonGAfDown> {
         });
         
         label.setText("0\u00b0");
-        
-        container.getChildren().addAll(knob);
     }
     
     private void run() {
@@ -84,7 +70,6 @@ public class CompassPresenter extends GluonPresenter<GluonGAfDown> {
             knob.rotateProperty().bind(c.headingProperty().multiply(-1).add(360));
             label.textProperty().bind(Bindings.format("%.1f\u00b0", c.headingProperty()));
         });
-        
     }
     
 }

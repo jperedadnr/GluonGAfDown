@@ -25,7 +25,7 @@ public class MainPresenter extends GluonPresenter<GluonGAfDown> {
             if (newValue) {
                 AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        getApp().showLayer(GluonGAfDown.MENU_LAYER)));
+                        getApp().getDrawer().open()));
                 appBar.setTitleText("Main");
                 appBar.getActionItems().add(MaterialDesignIcon.SEARCH.button(e -> 
                         System.out.println("Search")));

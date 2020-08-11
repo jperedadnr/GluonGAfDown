@@ -6,11 +6,11 @@ import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInRightTransition;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.BottomNavigation;
+import com.gluonhq.charm.glisten.control.BottomNavigationButton;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.gaf.down.GluonGAfDown;
 import javafx.fxml.FXML;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 
 public class PicturesPresenter extends GluonPresenter<GluonGAfDown> {
@@ -31,7 +31,7 @@ public class PicturesPresenter extends GluonPresenter<GluonGAfDown> {
             if (newValue) {
                 AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        getApp().showLayer(GluonGAfDown.MENU_LAYER)));
+                        getApp().getDrawer().open()));
                 appBar.setTitleText(AppViewManager.PICTURES_VIEW.getTitle());
             }
         });
@@ -46,10 +46,13 @@ public class PicturesPresenter extends GluonPresenter<GluonGAfDown> {
             imageView.fitHeightProperty().unbind();
         });
         
-        final ToggleButton takePicButton = bottomNavigation.createButton("Take Picture", MaterialDesignIcon.PHOTO_CAMERA.graphic(), null);
-        takePicButton.setOnMousePressed(e -> Services.get(PicturesService.class).ifPresent(p -> p.takePhoto(true).ifPresent(imageView::setImage)));
+        final BottomNavigationButton takePicButton = new BottomNavigationButton("Take Picture", MaterialDesignIcon.PHOTO_CAMERA.graphic(), null);
         
-        final ToggleButton retrievePicButton = bottomNavigation.createButton("Retrieve Picture", MaterialDesignIcon.PHOTO_ALBUM.graphic(), null);
+        
+        takePicButton.setOnMousePressed(e -> Services.get(PicturesService.class).ifPresent(p -> p.takePhoto(true).ifPresent(imageView::setImage)));
+        Services.get(PicturesService.class).ifPresent(service -> takePicButton.setOnMousePressed(e ->  service.takePhoto(true).ifPresent(imageView::setImage)));
+        
+        final BottomNavigationButton retrievePicButton = new BottomNavigationButton("Retrieve Picture", MaterialDesignIcon.PHOTO_ALBUM.graphic(), null);
         retrievePicButton.setOnMousePressed(e -> Services.get(PicturesService.class).ifPresent(p -> p.loadImageFromGallery().ifPresent(imageView::setImage)));
 
         bottomNavigation.getActionItems().addAll(takePicButton, retrievePicButton);

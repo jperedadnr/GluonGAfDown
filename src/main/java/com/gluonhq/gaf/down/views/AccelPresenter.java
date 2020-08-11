@@ -51,7 +51,7 @@ public class AccelPresenter extends GluonPresenter<GluonGAfDown> {
             if (newValue) {
                 AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        getApp().showLayer(GluonGAfDown.MENU_LAYER)));
+                        getApp().getDrawer().open()));
                 appBar.setTitleText(AppViewManager.ACCEL_VIEW.getTitle());
                 
                 run();

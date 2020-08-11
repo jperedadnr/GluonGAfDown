@@ -1,16 +1,26 @@
 buildscript {
     repositories {
+        google()
         jcenter()
+        maven {
+            url 'http://nexus.gluonhq.com/nexus/content/repositories/releases'
+        }
     }
     dependencies {
-        classpath 'org.javafxports:jfxmobile-plugin:1.3.4'
+        classpath 'org.javafxports:jfxmobile-plugin:1.3.18'
+//        classpath 'org.javafxports:jfxmobile-plugin:2.0.29'
     }
 }
 
 apply plugin: 'org.javafxports.jfxmobile'
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 repositories {
+    mavenLocal()
     jcenter()
+    google()
     maven {
         url 'http://nexus.gluonhq.com/nexus/content/repositories/releases'
     }
@@ -19,12 +29,15 @@ repositories {
 mainClassName = 'com.gluonhq.gaf.down.GluonGAfDown'
 
 dependencies {
-    compile 'com.gluonhq:glisten-afterburner:1.1.0'
+    compile 'com.gluonhq:charm:5.0.0-jdk9'
+    androidRuntime 'com.gluonhq:charm:5.0.0'
+    compile 'com.gluonhq:glisten-afterburner:1.4.0-jdk9'
+    androidRuntime 'com.gluonhq:glisten-afterburner:1.4.1'
 }
 
 jfxmobile {
     downConfig {
-        version = '3.2.2'
+        version = '3.8.6'
         // Do not edit the line below. Use Gluon Mobile Settings in your project context menu instead
         plugins 'accelerometer', 'compass', 'display', 'lifecycle', 'magnetometer', 'pictures', 'statusbar', 'storage'
     }
@@ -33,13 +46,15 @@ jfxmobile {
     }
     ios {
         infoPList = file('src/ios/Default-Info.plist')
+        frameworks = ['CoreMotion']
         forceLinkClasses = [
                 'com.gluonhq.gaf.down.**.*',
                 'com.gluonhq.**.*',
                 'javax.annotations.**.*',
                 'javax.inject.**.*',
                 'javax.json.**.*',
-                'org.glassfish.json.**.*'
+                'org.glassfish.json.**.*',
+                'java.util.**.*'
         ]
     }
 }

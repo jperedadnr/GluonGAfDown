@@ -1,22 +1,41 @@
 package com.gluonhq.gaf.down;
 
+import com.gluonhq.charm.down.Platform;
 import com.gluonhq.gaf.down.views.AppViewManager;
 import com.gluonhq.charm.glisten.application.MobileApplication;
-import com.gluonhq.charm.glisten.layout.layer.SidePopupView;
 import com.gluonhq.charm.glisten.visual.Swatch;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.lang.reflect.Method;
+
 public class GluonGAfDown extends MobileApplication {
 
-    public static final String MENU_LAYER = "Side Menu";
-    
+    static {
+        if (Platform.isAndroid()) {
+            try {
+                Method forName = Class.class.getDeclaredMethod("forName", String.class);
+                Method getDeclaredMethod = Class.class.getDeclaredMethod("getDeclaredMethod", String.class, Class[].class);
+
+                Class<?> vmRuntimeClass = (Class<?>) forName.invoke(null, "dalvik.system.VMRuntime");
+                Method getRuntime = (Method) getDeclaredMethod.invoke(vmRuntimeClass, "getRuntime", null);
+                Method setHiddenApiExemptions = (Method) getDeclaredMethod.invoke(vmRuntimeClass, "setHiddenApiExemptions", new Class[]{String[].class});
+                Object sVmRuntime = getRuntime.invoke(null);
+                if (sVmRuntime != null && setHiddenApiExemptions != null) {
+                    setHiddenApiExemptions.invoke(sVmRuntime, new Object[]{new String[]{"L"}});
+                }
+            } catch (Throwable e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+    }
+
     @Override
     public void init() {
-        AppViewManager.registerViews(this);
+        System.setProperty("com.gluonhq.charm.down.debug", "true");
         
-        addLayerFactory(MENU_LAYER, () -> new SidePopupView(new DrawerManager().getDrawer()));
+        AppViewManager.registerViewsAndDrawer(this);
     }
 
     @Override

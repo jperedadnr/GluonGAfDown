@@ -6,21 +6,12 @@
         <string>com.gluonhq.gaf.down.GluonGAfDown</string>
         <key>CFBundleVersion</key>
         <string>1.0</string>
+        <key>CFBundleShortVersionString</key>
+        <string>1.0.0</string>
         <key>CFBundleExecutable</key>
         <string>GluonGAfDown</string>
-        <key>CFBundleIconFiles</key>
-        <array>
-                <string>Icon-60</string>
-                <string>Icon-76</string>
-                <string>Icon-Small-40</string>
-                <string>Icon-Small</string>
-        </array>
-        <key>CFBundleIconFiles~ipad</key>
-        <array>
-                <string>Icon-76</string>
-                <string>Icon-Small-40</string>
-                <string>Icon-Small</string>
-        </array>
+        <key>CFBundleIconName</key>
+        <string>AppIcon</string>
         <key>CFBundleName</key>
         <string>GluonGAfDown</string>
         <key>CFBundlePackageType</key>
@@ -43,16 +34,20 @@
         </array>
         <key>UIRequiredDeviceCapabilities</key>
         <array>
-                <string>armv7</string>
+                <string>arm64</string>
         </array>
         <key>UIDeviceFamily</key>
         <array>
                 <integer>1</integer>
                 <integer>2</integer>
         </array>
+        <key>MinimumOSVersion</key>
+	<string>8.0</string>    
         <key>NSCameraUsageDescription</key>
         <string>The app requires access to the camera</string>
         <key>NSPhotoLibraryUsageDescription</key>
+        <string>The app requires access to the gallery</string>
+        <key>NSPhotoLibraryAddUsageDescription</key>
         <string>The app requires access to the gallery</string>
 </dict>
 </plist>
